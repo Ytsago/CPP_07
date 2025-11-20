@@ -27,6 +27,4 @@ int main() {
 
 	out << "\n\nUsing print<T>(const T& c); with const std::string...\n";
 	iter(someText.c_str(), someText.length(), print<char>);
-
-
 }

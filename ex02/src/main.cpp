@@ -30,6 +30,7 @@ int main() {
 	myString.push('r');
 	myString.push('l');
 	myString.push('d');
+	myString.push('\n');
 	myString.push('\0');
 
 	out << myString.getArray() << std::endl;
