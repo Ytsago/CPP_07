@@ -59,12 +59,12 @@ int main() {
 
 	out << "Adding a new element [5]: [4] / 3... \nNew values: \n";
 	myInt.push(myInt[4] / 3);
-	print(myInt, myInt.getSize());
+	print(myInt, myInt.size());
 
 	out << "\nCreating a new array using the previous one newArray(oldArray)... \n";
 	Array<int> myNewInt(myInt);
 	out << "Values :\n";
-	print(myNewInt, myNewInt.getSize());
+	print(myNewInt, myNewInt.size());
 
 	out << "\nTesting an array of array...\n\n";
 	Array<Array<int> > myArray(1);
@@ -76,9 +76,9 @@ int main() {
 	myNewArray = myArray;
 
 	out << "\nFirst Array values: \n";
-	print(myArray[0], myArray[0].getSize());
-	print(myArray[1], myArray[1].getSize());
+	print(myArray[0], myArray[0].size());
+	print(myArray[1], myArray[1].size());
 	out << "\nCopied array values: \n";
-	print(myNewArray[0], myNewArray[0].getSize());
-	print(myNewArray[1], myNewArray[1].getSize());
+	print(myNewArray[0], myNewArray[0].size());
+	print(myNewArray[1], myNewArray[1].size());
 }

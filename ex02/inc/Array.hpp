@@ -15,7 +15,7 @@ class Array {
 		T&	operator[](const unsigned int& nb);
 		void	push(const T& element);
 		void	pop();
-		const unsigned int& getSize() const;
+		const unsigned int& size() const;
 		const unsigned int& getCapacity() const;
 		T*	getArray() const;
 	private:
