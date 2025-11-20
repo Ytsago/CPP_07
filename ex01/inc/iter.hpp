@@ -8,6 +8,7 @@ void	iter(T* ptr, const unsigned long long length, F f ) {
 	for (unsigned long long i = 0; i < length; i++) {
 		f(ptr[i]);
 	}
+	size_t i;
 }
 
 #endif

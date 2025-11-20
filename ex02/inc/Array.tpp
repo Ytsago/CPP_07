@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include <limits>
+#include <cstring>
 
 template <typename T>
 Array<T>::Array() : _array(NULL), _capacity(0), _size(0) {
@@ -10,13 +11,12 @@ Array<T>::Array(const unsigned int& capacity) {
 	this->_capacity = capacity;
 	this->_size = 0;
 	this->_array = new T[capacity];
+	std::memset(this->_array, 0, capacity * sizeof(T));
 }
 
 template <typename T>
-Array<T>::Array(const Array<T> &other) {
-	this->_size = other._size;
-	this->_capacity = other._capacity;
-	this->_array = new T[other._capacity];
+Array<T>::Array(const Array<T> &other) : _array(NULL), _capacity(0), _size(0) {
+	*this = other;
 }
 
 template <typename T>
@@ -32,6 +32,7 @@ Array<T>	&Array<T>::operator=(const Array<T> &other) {
 			this->_array = new T[other._capacity];
 			for (unsigned int i = 0; i < this->_size; i++)
 				this->_array[i] = other._array[i];
+			std::memset(&this->_array[this->_size],0 , sizeof(T) * (this->_capacity - this->_size));
 		}
 	}
 	return (*this);
@@ -39,8 +40,10 @@ Array<T>	&Array<T>::operator=(const Array<T> &other) {
 
 template <typename T>
 T& Array<T>::operator[](const unsigned int& index) {
-	if (index >= this->_size)
+	if (index >= this->_capacity)
 		throw std::out_of_range("Out of bound");
+	if (index >= this->_size)
+		this->_size = index + 1;
 	return this->_array[index];
 }
 
@@ -55,6 +58,11 @@ const unsigned int& Array<T>::getCapacity() const {
 }
 
 template <typename T>
+T*	Array<T>::getArray() const {
+	return this->_array;
+}
+
+
 
 template <typename T>
 bool	Array<T>::resize() {
@@ -72,6 +80,7 @@ bool	Array<T>::resize() {
 	for (unsigned int i = 0; i < this->_size; i++) {
 		newArray[i] = this->_array[i];	
 	}
+	std::memset(&newArray[this->_size],0 , sizeof(T) * (this->_capacity - this->_size));
 	delete[] this->_array;
 	this->_array = newArray;
 	return 0;
@@ -79,12 +88,14 @@ bool	Array<T>::resize() {
 
 template <typename T>
 void	Array<T>::push(const T& element) {
+	if (!this->_array)
+		return ;
 	if (this->_size == this->_capacity) {
 		if (this->resize())
 			return ;
-		this[this->_size] = element;
-		this->_size++;
 	}
+   	this->_array[this->_size] = element;
+   	this->_size++;
 }
 
 template <typename T>

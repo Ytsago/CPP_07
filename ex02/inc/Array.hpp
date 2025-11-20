@@ -2,6 +2,7 @@
 # define ARRAY_HPP
 
 #include <iostream>
+#include <limits>
 
 template <class T>
 class Array {
@@ -25,4 +26,6 @@ class Array {
 		bool	resize();
 
 };
+
+#include "Array.tpp"
 #endif
